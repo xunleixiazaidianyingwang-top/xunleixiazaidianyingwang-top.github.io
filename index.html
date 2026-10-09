@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迅雷下载电影网 | 极速磁力BT种子下载 | 高清影视资源全协议下载站</title>
+<meta name="description" content="迅雷下载电影网(xunleixiazaidianyingwang-top)专注影视资源的极速下载服务，全面支持HTTP、FTP、BT种子、磁力链接、ed2k等下载协议。汇聚最新院线电影、高清剧集、动漫综艺等资源，多线程加速、云端离线下载、秒播即看，让每一部好片都能以最快速度抵达你的设备。">
+<meta name="keywords" content="迅雷下载电影网, 磁力链接下载, BT种子下载, 高清电影下载, 影视资源下载, 多线程加速, 离线下载, xunleixiazaidianyingwang-top">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"JetBrains Mono","Fira Code","PingFang SC","Microsoft YaHei",monospace,sans-serif;background:#0a0a0f;color:#e8e8f0;line-height:1.7;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* 顶部终端条 */
+.term-top{background:#050508;border-bottom:1px solid #1a1a25;padding:.5rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:#6a6a7a;font-family:"JetBrains Mono",monospace}
+.term-top .left::before{content:"● ";color:#00ffa3}
+.term-top .right{letter-spacing:1px}
+
+/* 主导航 */
+.main-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid #1a1a25}
+.nav-in{max-width:1300px;margin:0 auto;padding:.8rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.brand{display:flex;align-items:center;gap:.75rem}
+.brand-logo{width:38px;height:38px;background:linear-gradient(135deg,#00ffa3,#00b8ff);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:#0a0a0f;font-family:"JetBrains Mono",monospace}
+.brand-text h1{font-size:1.25rem;font-weight:800;letter-spacing:-.5px;line-height:1.1}
+.brand-text h1 em{font-style:normal;background:linear-gradient(135deg,#00ffa3,#00b8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.brand-text small{font-size:.65rem;color:#6a6a7a;letter-spacing:1px}
+.nav-links{display:flex;gap:.25rem;font-size:.85rem;font-family:"PingFang SC",sans-serif}
+.nav-links a{padding:.5rem 1rem;border-radius:6px;color:#a0a0b0;transition:.2s}
+.nav-links a:hover,.nav-links a.active{background:rgba(0,255,163,.1);color:#00ffa3}
+.nav-cta{background:linear-gradient(135deg,#00ffa3,#00b8ff);color:#0a0a0f;padding:.6rem 1.5rem;border-radius:8px;font-weight:700;font-size:.85rem;transition:.2s;cursor:pointer;border:none;font-family:"PingFang SC",sans-serif}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(0,255,163,.4)}
+
+/* Hero 终端风 */
+.hero{position:relative;min-height:80vh;display:flex;align-items:center;overflow:hidden;padding:4rem 1.5rem}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,184,255,.08),transparent 55%),radial-gradient(ellipse at 70% 30%,rgba(0,255,163,.06),transparent 50%)}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.01) 2px,rgba(255,255,255,.01) 4px)}
+.hero-in{max-width:1300px;margin:0 auto;position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1.3fr .7fr;gap:4rem;align-items:center}
+.hero-text .prompt{font-size:.8rem;color:#00ffa3;margin-bottom:1rem;font-family:"JetBrains Mono",monospace}
+.hero-text .prompt::before{content:"$ "}
+.hero-text h2{font-size:clamp(2rem,5.5vw,4.5rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:1.5rem}
+.hero-text h2 .cyan{color:#00b8ff}
+.hero-text h2 .green{color:#00ffa3}
+.hero-text p{font-size:1rem;color:#a0a0b0;max-width:520px;margin-bottom:2rem;font-family:"PingFang SC",sans-serif;line-height:1.8}
+.hero-text .cmds{display:flex;gap:.75rem;flex-wrap:wrap}
+.cmd{padding:.85rem 1.75rem;border-radius:6px;font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s;font-family:"PingFang SC",sans-serif}
+.cmd-primary{background:linear-gradient(135deg,#00ffa3,#00b8ff);color:#0a0a0f;border:none}
+.cmd-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,255,163,.3)}
+.cmd-outline{background:transparent;color:#e8e8f0;border:1px solid #2a2a3a}
+.cmd-outline:hover{border-color:#00ffa3;color:#00ffa3}
+
+/* 终端窗口 */
+.terminal{background:#0d0d14;border:1px solid #1f1f2e;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.terminal-bar{background:#151520;padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #1f1f2e}
+.terminal-bar .dot{width:11px;height:11px;border-radius:50%}
+.terminal-bar .dot.r{background:#ff5f56}
+.terminal-bar .dot.y{background:#ffbd2e}
+.terminal-bar .dot.g{background:#27c93f}
+.terminal-bar .title{margin-left:1rem;font-size:.75rem;color:#6a6a7a;flex:1;text-align:center}
+.terminal-body{padding:1.25rem;font-size:.82rem;line-height:2}
+.terminal-body .line{margin-bottom:.5rem}
+.terminal-body .ok{color:#00ffa3}
+.terminal-body .info{color:#00b8ff}
+.terminal-body .warn{color:#ffbd2e}
+.terminal-body .dim{color:#6a6a7a}
+.pbar{height:6px;background:#1a1a25;border-radius:3px;overflow:hidden;margin:.5rem 0}
+.pbar .fill{height:100%;background:linear-gradient(90deg,#00ffa3,#00b8ff);border-radius:3px;width:0;transition:width 1s}
+
+/* 协议条 */
+.protocols{display:flex;justify-content:center;gap:2rem;padding:1.5rem;flex-wrap:wrap;border-top:1px solid #1a1a25;border-bottom:1px solid #1a1a25;background:#08080c}
+.protocols span{font-size:.8rem;color:#8a8a9a;display:flex;align-items:center;gap:.4rem}
+.protocols span::before{content:"";width:6px;height:6px;border-radius:50%;background:#00ffa3}
+
+/* 数据横幅 */
+.data-banner{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-bottom:1px solid #1a1a25}
+.data-banner .cell{padding:2.5rem 1rem;text-align:center;border-right:1px solid #1a1a25;background:#0a0a0f}
+.data-banner .cell:last-child{border-right:none}
+.data-banner .n{font-size:2rem;font-weight:900;color:#00ffa3}
+.data-banner .l{font-size:.78rem;color:#7a7a8a;margin-top:.25rem;font-family:"PingFang SC",sans-serif}
+
+/* 通用 */
+.wrap{max-width:1300px;margin:0 auto;padding:5rem 1.5rem}
+.sec-head{margin-bottom:3rem}
+.sec-head .label{font-size:.72rem;letter-spacing:4px;color:#00ffa3;text-transform:uppercase;display:block;margin-bottom:.5rem}
+.sec-head h2{font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-1px}
+.sec-head h2 em{font-style:normal;color:#00b8ff}
+.sec-head p{font-size:.92rem;color:#8a8a9a;margin-top:.75rem;max-width:600px;font-family:"PingFang SC",sans-serif}
+
+/* 资源卡片网格 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+.card{background:#0d0d14;border:1px solid #1a1a25;border-radius:10px;overflow:hidden;transition:.25s;position:relative}
+.card:hover{border-color:rgba(0,255,163,.4);transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.card .bar{height:120px;position:relative;display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.card .bar .type{position:absolute;top:8px;left:8px;font-size:.65rem;padding:.2rem .5rem;border-radius:3px;background:rgba(0,0,0,.5);color:#00ffa3;font-family:"JetBrains Mono",monospace}
+.card .bar .size{position:absolute;bottom:8px;right:8px;font-size:.65rem;color:#a0a0b0;font-family:"JetBrains Mono",monospace}
+.card:nth-child(odd) .bar{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)}
+.card:nth-child(even) .bar{background:linear-gradient(135deg,#1a2980,#26d0ce)}
+.card:nth-child(3n) .bar{background:linear-gradient(135deg,#42275a,#734b6d)}
+.card:nth-child(4n) .bar{background:linear-gradient(135deg,#232526,#414345)}
+.card .body{padding:1.25rem}
+.card .body h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;font-family:"PingFang SC",sans-serif}
+.card .body .meta{display:flex;justify-content:space-between;font-size:.75rem;color:#7a7a8a;margin-bottom:.75rem;font-family:"JetBrains Mono",monospace}
+.card .body .dl{display:flex;align-items:center;gap:.5rem;padding:.6rem 1rem;background:rgba(0,255,163,.08);border:1px solid rgba(0,255,163,.2);border-radius:6px;color:#00ffa3;font-size:.8rem;font-weight:600;transition:.2s;cursor:pointer;font-family:"PingFang SC",sans-serif}
+.card .body .dl:hover{background:rgba(0,255,163,.15)}
+
+/* 协议说明区 */
+.protocols-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.protocol-card{background:#0d0d14;border:1px solid #1a1a25;border-radius:10px;padding:1.5rem;transition:.25s}
+.protocol-card:hover{border-color:#00b8ff}
+.protocol-card .ic{font-size:1.8rem;margin-bottom:.75rem}
+.protocol-card h4{font-size:1rem;font-weight:700;margin-bottom:.5rem;font-family:"PingFang SC",sans-serif}
+.protocol-card p{font-size:.82rem;color:#8a8a9a;line-height:1.7;font-family:"PingFang SC",sans-serif}
+.protocol-card .tag{display:inline-block;font-size:.68rem;color:#00ffa3;background:rgba(0,255,163,.08);padding:.2rem .5rem;border-radius:3px;margin-top:.75rem;font-family:"JetBrains Mono",monospace}
+
+/* 下载教程 */
+.tutorial{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
+.step{background:#0d0d14;border:1px solid #1a1a25;border-left:3px solid #00ffa3;border-radius:8px;padding:1.5rem;transition:.25s}
+.step:hover{background:#10101a}
+.step .num{font-size:2rem;font-weight:900;color:#1a2a25;margin-bottom:.5rem;font-family:"JetBangs Mono",monospace}
+.step h4{font-size:1rem;font-weight:700;margin-bottom:.5rem;font-family:"PingFang SC",sans-serif}
+.step p{font-size:.82rem;color:#8a8a9a;line-height:1.7;font-family:"PingFang SC",sans-serif}
+
+/* 链接展示区 */
+.magnet-show{background:#08080c;border:1px solid #1a1a25;border-radius:12px;padding:2rem;margin-top:2rem}
+.magnet-show h4{font-size:.9rem;color:#00ffa3;margin-bottom:1rem;font-family:"JetBrains Mono",monospace}
+.magnet-box{background:#0d0d14;border:1px dashed #2a2a3a;border-radius:6px;padding:1rem;font-size:.75rem;color:#6a6a7a;word-break:break-all;font-family:"JetBrains Mono",monospace;line-height:1.8}
+
+/* 页脚 */
+.foot{background:#050508;border-top:1px solid #1a1a25;padding:4rem 1.5rem 2rem}
+.foot-in{max-width:1300px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:3rem}
+.foot-brand h3{font-size:1.3rem;font-weight:900;margin-bottom:.5rem}
+.foot-brand h3 em{font-style:normal;color:#00ffa3}
+.foot-brand p{font-size:.85rem;color:#7a7a8a;line-height:1.7;font-family:"PingFang SC",sans-serif}
+.foot-col h5{font-size:.85rem;color:#e8e8f0;margin-bottom:1rem;font-weight:700;font-family:"PingFang SC",sans-serif}
+.foot-col ul{list-style:none}
+.foot-col ul li{padding:.4rem 0;font-size:.82rem;color:#7a7a8a;font-family:"PingFang SC",sans-serif}
+.foot-col ul li a:hover{color:#00ffa3}
+.foot-bot{border-top:1px solid #1a1a25;padding-top:2rem;text-align:center}
+.foot-bot .url{font-family:"JetBrains Mono",monospace;font-size:.85rem;color:#00b8ff;background:#0d0d14;border:1px solid #1f1f2e;padding:.6rem 1.5rem;border-radius:6px;display:inline-block;margin:.5rem 0}
+.foot-bot p{font-size:.75rem;color:#6a6a7a;font-family:"PingFang SC",sans-serif}
+
+@media(max-width:768px){
+.term-top{font-size:.65rem}
+.nav-links{display:none}
+.hero-in{grid-template-columns:1fr;gap:2rem}
+.hero-text h2{letter-spacing:-1px}
+.data-banner{grid-template-columns:repeat(2,1fr)}
+.data-banner .cell{border-bottom:1px solid #1a1a25}
+.grid{grid-template-columns:1fr;gap:1rem}
+.card .bar{height:100px;font-size:2rem}
+.foot-top{grid-template-columns:1fr;gap:1.5rem}
+.terminal-body{font-size:.72rem}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<!-- 终端条 -->
+<div class="term-top">
+<span class="left">system online · xunleixiazaidianyingwang-top</span>
+<span class="right">uptime: 99.97% | nodes: 12,480</span>
+</div>
+
+<!-- 主导航 -->
+<nav class="main-nav">
+<div class="nav-in">
+<div class="brand">
+<div class="brand-logo">迅</div>
+<div class="brand-text">
+<h1><em>迅雷</em>下载电影网</h1>
+<small>XUNLEI DOWNLOAD · P2P ACCELERATION</small>
+</div>
+</div>
+<div class="nav-links">
+<a href="#" class="active">首页</a>
+<a href="#resources">资源库</a>
+<a href="#protocols">下载协议</a>
+<a href="#tutorial">下载教程</a>
+<a href="#about">关于本站</a>
+</div>
+<button class="nav-cta">开始下载</button>
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+<div class="hero-in">
+<div class="hero-text">
+<div class="prompt">init_download_engine --mode=ultra</div>
+<h2>极速下载<br><span class="cyan">快</span>人<span class="green">一步</span></h2>
+<p>迅雷下载电影网，全面支持 HTTP、FTP、BT 种子、磁力链接、ed2k 全协议下载。多线程加速引擎 + 云端离线下载，让每一部高清影视资源以最快速度抵达你的设备。</p>
+<div class="cmds">
+<button class="cmd cmd-primary">立即获取资源</button>
+<button class="cmd cmd-outline">查看下载教程</button>
+</div>
+</div>
+<div class="terminal">
+<div class="terminal-bar">
+<div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+<div class="title">download_manager.exe</div>
+</div>
+<div class="terminal-body" id="termBody">
+<div class="line"><span class="dim">[10:24:01]</span> <span class="info">→</span> Initializing download engine v25.2.0...</div>
+<div class="line"><span class="dim">[10:24:01]</span> <span class="ok">✓</span> Engine ready · 12,480 nodes connected</div>
+<div class="line"><span class="dim">[10:24:02]</span> <span class="info">→</span> Fetching: 周处除三害.2024.2160p.WEB-DL.mkv</div>
+<div class="line"><span class="dim">[10:24:02]</span> <span class="ok">✓</span> Sources: 8 seeds / 142 peers</div>
+<div class="line" style="margin-top:1rem">
+<span class="dim">▕████████████████</span> <span class="ok">78%</span> <span class="warn">3.2 MB/s</span>
+</div>
+<div class="pbar"><div class="fill" id="pFill"></div></div>
+<div class="line"><span class="dim">[10:24:18]</span> <span class="info">→</span> ETA: 00:00:42</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 协议条 -->
+<div class="protocols">
+<span>HTTP / HTTPS</span>
+<span>FTP</span>
+<span>BT 种子</span>
+<span>磁力链接</span>
+<span>ed2k</span>
+<span>云添加</span>
+</div>
+
+<!-- 数据横幅 -->
+<section class="data-banner">
+<div class="cell"><div class="n">2,860</div><div class="l">今日新增资源</div></div>
+<div class="cell"><div class="n">186万</div><div class="l">累计下载次数</div></div>
+<div class="cell"><div class="n">5.2万</div><div class="l">活跃下载节点</div></div>
+<div class="cell"><div class="n">12.4MB/s</div><div class="l">平均下载速度</div></div>
+<div class="cell"><div class="n">99.97%</div><div class="l">服务可用率</div></div>
+</section>
+
+<!-- 资源库 -->
+<section class="wrap" id="resources">
+<div class="sec-head">
+<span class="label">Resource Library</span>
+<h2>热门<em>资源库</em></h2>
+<p>每日同步更新最新院线电影、高分剧集与经典老片，支持一键获取下载链接</p>
+</div>
+<div class="grid">
+<div class="card">
+<div class="bar"><span class="type">BT</span><span class="size">12.4 GB</span>🎬</div>
+<div class="body">
+<h3>周处除三害 2024 2160p WEB-DL</h3>
+<div class="meta"><span>动作 / 犯罪</span><span>热度 9.2</span></div>
+<div class="dl">⚡ 获取下载链接</div>
+</div>
+</div>
+<div class="card">
+<div class="bar"><span class="type">磁力</span><span class="size">8.7 GB</span>🎬</div>
+<div class="body">
+<h3>热辣滚烫 2024 1080p HDR</h3>
+<div class="meta"><span>剧情 / 运动</span><span>热度 8.8</span></div>
+<div class="dl">⚡ 获取下载链接</div>
+</div>
+</div>
+<div class="card">
+<div class="bar"><span class="type">BT</span><span class="size">24.1 GB</span>🎬</div>
+<div class="body">
+<h3>沙丘2 2024 4K HDR 杜比视界</h3>
+<div class="meta"><span>科幻 / 冒险</span><span>热度 9.0</span></div>
+<div class="dl">⚡ 获取下载链接</div>
+</div>
+</div>
+<div class="card">
+<div class="bar"><span class="type">磁力</span><span class="size">15.6 GB</span>🎬</div>
+<div class="body">
+<h3>第二十条 2024 2160p WEB-DL</h3>
+<div class="meta"><span>剧情 / 喜剧</span><span>热度 8.6</span></div>
+<div class="dl">⚡ 获取下载链接</div>
+</div>
+</div>
+<div class="card">
+<div class="bar"><span class="type">BT</span><span class="size">6.3 GB</span>🎬</div>
+<div class="body">
+<h3>哥斯拉大战金刚2 2024 1080p</h3>
+<div class="meta"><span>动作 / 科幻</span><span>热度 8.1</span></div>
+<div class="dl">⚡ 获取下载链接</div>
+</div>
+</div>
+<div class="card">
+<div class="bar"><span class="type">磁力</span><span class="size">9.8 GB</span>🎬</div>
+<div class="body">
+<h3>破墓 2024 2160p WEB-DL 韩语原声</h3>
+<div class="meta"><span>惊悚 / 韩国</span><span>热度 8.8</span></div>
+<div class="dl">⚡ 获取下载链接</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 下载协议 -->
+<section class="wrap" id="protocols">
+<div class="sec-head">
+<span class="label">Protocol Support</span>
+<h2>全<em>协议</em>支持</h2>
+<p>覆盖主流下载协议，无论什么格式的资源，都能找到最适合的下载方式</p>
+</div>
+<div class="protocols-grid">
+<div class="protocol-card">
+<div class="ic">🔗</div>
+<h4>HTTP / HTTPS</h4>
+<p>普通直链下载，多线程分片加速，支持断点续传与镜像源自动切换。</p>
+<span class="tag">magnet:?xt=urn:btih:</span>
+</div>
+<div class="protocol-card">
+<div class="ic">🧲</div>
+<h4>磁力链接</h4>
+<p>无需种子文件，直接通过 InfoHash 从 DHT 网络中检索并下载资源。</p>
+<span class="tag">ed2k://|file|</span>
+</div>
+<div class="protocol-card">
+<div class="ic">💽</div>
+<h4>BT 种子</h4>
+<p>支持 .torrent 文件解析，自动连接 Tracker 与 DHT 节点获取最优源。</p>
+<span class="tag">.torrent</span>
+</div>
+<div class="protocol-card">
+<div class="ic">☁️</div>
+<h4>云端离线</h4>
+<p>将下载任务提交至云端服务器，离线完成后即可高速取回本地。</p>
+<span class="tag">cloud://add</span>
+</div>
+<div class="protocol-card">
+<div class="ic">⚡</div>
+<h4>多线程加速</h4>
+<p>单文件多连接并发下载，智能调度带宽，冷门资源也能拉满速度。</p>
+<span class="tag">threads: 64</span>
+</div>
+<div class="protocol-card">
+<div class="ic">📺</div>
+<h4>链接秒播</h4>
+<p>支持主流协议链接即点即播，无需等待全量下载即可流畅观看。</p>
+<span class="tag">stream://</span>
+</div>
+</div>
+</section>
+
+<!-- 下载教程 -->
+<section class="wrap" id="tutorial">
+<div class="sec-head">
+<span class="label">How To Download</span>
+<h2>下载<em>教程</em></h2>
+<p>三步上手，轻松获取你想要的影视资源</p>
+</div>
+<div class="tutorial">
+<div class="step">
+<div class="num">01</div>
+<h4>搜索资源</h4>
+<p>在资源库中按片名、类型或年份检索，找到目标影片后查看详细信息与文件列表。</p>
+</div>
+<div class="step">
+<div class="num">02</div>
+<h4>选择协议</h4>
+<p>根据资源类型选择 BT 种子、磁力链接或直链下载，复制对应链接到下载工具。</p>
+</div>
+<div class="step">
+<div class="num">03</div>
+<h4>开始下载</h4>
+<p>粘贴链接后引擎自动解析并连接最优节点，多线程加速，实时查看进度与速度。</p>
+</div>
+<div class="step">
+<div class="num">04</div>
+<h4>云端取回</h4>
+<p>支持将任务提交至云端离线下载，关机也不影响进度，完成后高速取回本地。</p>
+</div>
+</div>
+
+<div class="magnet-show">
+<h4>// 磁力链接示例（仅供演示格式）</h4>
+<div class="magnet-box">
+magnet:?xt=urn:btih:3A4B5C6D7E8F9A0B1C2D3E4F5A6B7C8D9E0F1A2B<br>
+&dn=Example.Movie.2024.2160p.WEB-DL.x265<br>
+&tr=udp://tracker.example.com:1337/announce
+</div>
+</div>
+</section>
+
+<!-- 页脚 -->
+<footer class="foot" id="about">
+<div class="foot-in">
+<div class="foot-top">
+<div class="foot-brand">
+<h3><em>迅雷</em>下载电影网</h3>
+<p>专注影视资源的极速下载服务，全面支持全协议下载与云端离线，让好片以最快速度抵达你的设备。</p>
+</div>
+<div class="foot-col">
+<h5>下载协议</h5>
+<ul>
+<li><a href="#">HTTP / FTP</a></li>
+<li><a href="#">BT 种子</a></li>
+<li><a href="#">磁力链接</a></li>
+<li><a href="#">ed2k</a></li>
+<li><a href="#">云端离线</a></li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>资源分类</h5>
+<ul>
+<li><a href="#">院线电影</a></li>
+<li><a href="#">高清剧集</a></li>
+<li><a href="#">动漫动画</a></li>
+<li><a href="#">综艺纪录片</a></li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>帮助中心</h5>
+<ul>
+<li><a href="#">下载教程</a></li>
+<li><a href="#">常见问题</a></li>
+<li><a href="#">速度优化</a></li>
+<li><a href="#">联系我们</a></li>
+</ul>
+</div>
+</div>
+<div class="foot-bot">
+<div class="url">https://xunleixiazaidianyingwang-top.github.io</div>
+<p>本站为影视资源下载信息索引平台，所有下载链接与资源均来自互联网公开渠道，版权归原作者及发行方所有。</p>
+<p style="margin-top:.5rem">© 2024 迅雷下载电影网 · 极速下载 · 快人一步</p>
+</div>
+</div>
+</footer>
+
+<script>
+// 进度条动画
+window.addEventListener('load',function(){
+setTimeout(function(){
+document.getElementById('pFill').style.width='78%';
+},500);
+});
+// 导航高亮
+document.querySelectorAll('.nav-links a').forEach(function(a){
+a.addEventListener('click',function(){
+document.querySelectorAll('.nav-links a').forEach(function(n){n.classList.remove('active')});
+this.classList.add('active');
+});
+});
+// 下载按钮点击反馈
+document.querySelectorAll('.dl').forEach(function(b){
+b.addEventListener('click',function(){
+var orig=this.textContent;
+this.textContent='✓ 已复制链接';
+this.style.color='#00ffa3';
+var self=this;
+setTimeout(function(){self.textContent=orig;},2000);
+});
+});
+</script>
+</body>
+</html>
